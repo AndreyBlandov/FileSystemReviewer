@@ -1,0 +1,38 @@
+﻿<div ng-app="FileSystem" class="container">
+    <div ng-controller="FileSystemController as FSCtrl" data-ng-init="FSCtrl.GetDirectoryData()">
+
+
+        <table class="table table-bordered statistic">
+            <thead class="thead-inverse">
+                <tr>
+                    <th ng-repeat="statisticsGroup in FSCtrl.Model.Statistics">
+                        {{statisticsGroup.Name}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-repeat="statisticsGroup in FSCtrl.Model.Statistics">
+                        {{statisticsGroup.Count}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Current path:</strong>{{FSCtrl.Model.CurrentPath}}</p>
+
+        <ul>
+            <li ng-show="FSCtrl.HasParent()"><a href="" ng-click="FSCtrl.GetDirectoryData('')">..</a></li>
+            <li ng-repeat ="Directory in FSCtrl.Model.Directories"><a href="" ng-click="FSCtrl.GetDirectoryData(Directory)">{{Directory}}</a></li>
+            <li ng-repeat="File in FSCtrl.Model.Files">{{File}}</li>
+        </ul>
+
+
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/angular-app.js")
+}
